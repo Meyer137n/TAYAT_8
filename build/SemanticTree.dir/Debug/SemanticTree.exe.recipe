@@ -2,10 +2,10 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\taych\OneDrive\Рабочий стол\semantic_tree — копия\build\x64\Debug\ZERO_CHECK</FullPath>
+      <FullPath>C:\Users\taych\OneDrive\Рабочий стол\TAYAT_8_test\semantic_tree_8\build\x64\Debug\ZERO_CHECK</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\Users\taych\OneDrive\Рабочий стол\semantic_tree — копия\build\Debug\SemanticTree.exe</FullPath>
+      <FullPath>C:\Users\taych\OneDrive\Рабочий стол\TAYAT_8_test\semantic_tree_8\build\Debug\SemanticTree.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

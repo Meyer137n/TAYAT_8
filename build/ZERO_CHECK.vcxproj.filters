@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\taych\OneDrive\Рабочий стол\semantic_tree — копия\build\CMakeFiles\cc481c99f61f93104ef79acf276d68f6\generate.stamp.rule">
+    <CustomBuild Include="C:\Users\taych\OneDrive\Рабочий стол\TAYAT_8_test\semantic_tree_8\build\CMakeFiles\80fe6461cfc89f8ba6d29964b3af2964\generate.stamp.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{218691AE-3DEE-3362-9C2A-CBCB654D2EAB}</UniqueIdentifier>
+      <UniqueIdentifier>{784ABF22-8A62-3770-B10B-83AD270D70CB}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

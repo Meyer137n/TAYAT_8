@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\taych\OneDrive\Рабочий стол\semantic_tree — копия\src\main.cpp">
+    <ClCompile Include="C:\Users\taych\OneDrive\Рабочий стол\TAYAT_8_test\semantic_tree_8\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\taych\OneDrive\Рабочий стол\semantic_tree — копия\src\Diagram.cpp">
+    <ClCompile Include="C:\Users\taych\OneDrive\Рабочий стол\TAYAT_8_test\semantic_tree_8\src\Diagram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\taych\OneDrive\Рабочий стол\semantic_tree — копия\src\Scaner.cpp">
+    <ClCompile Include="C:\Users\taych\OneDrive\Рабочий стол\TAYAT_8_test\semantic_tree_8\src\Scaner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\taych\OneDrive\Рабочий стол\semantic_tree — копия\src\Tree.cpp">
+    <ClCompile Include="C:\Users\taych\OneDrive\Рабочий стол\TAYAT_8_test\semantic_tree_8\src\Tree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\taych\OneDrive\Рабочий стол\semantic_tree — копия\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\taych\OneDrive\Рабочий стол\TAYAT_8_test\semantic_tree_8\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{ADE08A24-771F-3124-8217-058D8A8649AD}</UniqueIdentifier>
+      <UniqueIdentifier>{90FD2FE5-9C02-38FA-B74D-281DBC0F4E8A}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

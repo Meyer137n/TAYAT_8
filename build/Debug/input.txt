@@ -7,7 +7,7 @@ int main()
 	b = func();
 	int a = 7*5, b, c = 12/3;
 	short d; 
-	// Коментарий
+	// �����������
 	long e = 11;
 	long long f, f1, f2;
 	function();

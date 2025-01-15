@@ -1,31 +1,29 @@
 #include "Scaner.h"
 
 /**
-* Список допустимых ключевых слов в программе
-*/
+ * пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+ */
 type_lex keyword[maxKeyword] =
-{
-    "int", "short", "long", "main", "return", "for", "const"
-};
+    {
+        "int", "short", "long", "main", "return", "for", "const"};
 
 /**
-* Список идентификаторов, которые соответствуют допустимым ключевым словам в программе
-*/
+ * пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+ */
 int indexKeyword[maxKeyword] =
-{
-    typeInt, typeShort, typeLong, typeMain, typeReturn, typeFor, typeConst
-};
+    {
+        typeInt, typeShort, typeLong, typeMain, typeReturn, typeFor, typeConst};
 
-//Ошибка если файл пустой
-void Scaner::PutUK(size_t uk) 
+// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+void Scaner::PutUK(size_t uk)
 {
-    if (uk < text.size()) 
+    if (uk < text.size())
     {
         this->uk = uk;
     }
-    else if(text.size() != 0)
+    else if (text.size() != 0)
     {
-        std::cerr << "Ошибка: индекс выходит за пределы размера текста." << std::endl;
+        std::cerr << "пїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ." << std::endl;
         exit(1);
     }
 }
@@ -35,51 +33,58 @@ size_t Scaner::GetUK()
     return uk;
 }
 
-void Scaner::GetData(const std::string& filename)
+void Scaner::GetData(const std::string &filename)
 {
     std::ifstream file(filename);
     if (file.is_open())
     {
         std::stringstream buffer;
         buffer << file.rdbuf();
-        text = buffer.str(); // Сохраняем текст из файла
+        text = buffer.str(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         text += '\n';
 
-        // Определяем позиции перевода строки
-        for (size_t i = 0; i < text.size(); ++i) {
-            if (text[i] == '\n') {
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+        for (size_t i = 0; i < text.size(); ++i)
+        {
+            if (text[i] == '\n')
+            {
                 lineBreakPositions.push_back(i);
             }
         }
 
-        std::cout << "Текст программы:" << std::endl << text << std::endl;
-        std::cout << std::endl << "Результат работы сканера:" << std::endl;
+        std::cout << "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:" << std::endl
+                  << text << std::endl;
+        std::cout << std::endl
+                  << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ:" << std::endl;
     }
     else
     {
-        PrintError("Ошибка открытия файла.", filename);
+        PrintError("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.", filename);
     }
 }
 
-void Scaner::PrintError(const std::string& error, const std::string& lexeme)
+void Scaner::PrintError(const std::string &error, const std::string &lexeme)
 {
     int line = 1;
     int pos = uk;
 
-    for (size_t i = 0; i < lineBreakPositions.size(); ++i) {
-        if (lineBreakPositions[i] < uk) {
+    for (size_t i = 0; i < lineBreakPositions.size(); ++i)
+    {
+        if (lineBreakPositions[i] < uk)
+        {
             line++;
         }
-        else {
+        else
+        {
             pos = uk - (i == 0 ? 0 : lineBreakPositions[i - 1] + 1);
             break;
         }
     }
 
-    std::cout << "Error: " << "строка " << line << ", " << error;
+    std::cout << "Error: " << "пїЅпїЅпїЅпїЅпїЅпїЅ " << line << ", " << error;
     if (!lexeme.empty())
     {
-        std::cout << "найдено: " << lexeme<<"\n\n";
+        std::cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " << lexeme << "\n\n";
     }
     exit(1);
 }
@@ -91,20 +96,20 @@ int Scaner::UseScaner(type_lex lex)
 
     while (true)
     {
-        // Пропускаем пробелы
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         while (uk < text.size() && (text[uk] == ' ' || text[uk] == '\t' || text[uk] == '\n'))
         {
             uk++;
         }
 
-        // Конец программы 
+        // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (uk >= text.size())
         {
             lex[i] = '\0';
             return typeEnd;
         }
 
-        // Обработка комментариев
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (text[uk] == '/')
         {
             uk++;
@@ -118,14 +123,14 @@ int Scaner::UseScaner(type_lex lex)
             }
             else
             {
-                // Деление
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 lex[i++] = '/';
                 lex[i++] = '\0';
                 return typeDiv;
             }
         }
 
-        // Обработка чисел
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         if (isdigit(text[uk]))
         {
             if (text[uk] == '0')
@@ -135,12 +140,12 @@ int Scaner::UseScaner(type_lex lex)
                 if (text[uk] == 'x')
                 {
                     lex[i++] = text[uk++];
-                    while (uk < text.size() && (isdigit(text[uk]) || (text[uk]>= 'A' && text[uk] <= 'F') || (text[uk] >= 'a' && text[uk] <= 'f')) && i < maxHexNumber - 1)
+                    while (uk < text.size() && (isdigit(text[uk]) || (text[uk] >= 'A' && text[uk] <= 'F') || (text[uk] >= 'a' && text[uk] <= 'f')) && i < maxHexNumber - 1)
                     {
                         lex[i++] = text[uk++];
                     }
-                    
-                    if (i == maxHexNumber - 1 && uk < text.size() && ( isdigit(text[uk]) || (text[uk] >= 'A' && text[uk] <= 'F') || (text[uk] >= 'a' && text[uk] <= 'f')))
+
+                    if (i == maxHexNumber - 1 && uk < text.size() && (isdigit(text[uk]) || (text[uk] >= 'A' && text[uk] <= 'F') || (text[uk] >= 'a' && text[uk] <= 'f')))
                     {
                         while (uk < text.size() && (isdigit(text[uk]) || (text[uk] >= 'A' && text[uk] <= 'F') || (text[uk] >= 'a' && text[uk] <= 'f')))
                         {
@@ -151,7 +156,7 @@ int Scaner::UseScaner(type_lex lex)
                             lex[i++] = text[uk++];
                         }
                         lex[i] = '\0';
-                        PrintError("Константа превышает максимальную длину, максимум 7 цифр: ", lex);
+                        PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 7 пїЅпїЅпїЅпїЅ: ", lex);
                         return typeError;
                     }
 
@@ -183,7 +188,7 @@ int Scaner::UseScaner(type_lex lex)
                     lex[i++] = text[uk++];
                 }
                 lex[i] = '\0';
-                PrintError("Константа превышает максимальную длину, максимум 9 цифр: ", lex);
+                PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 9 пїЅпїЅпїЅпїЅ: ", lex);
                 return typeError;
             }
 
@@ -198,8 +203,7 @@ int Scaner::UseScaner(type_lex lex)
             return typeConstInt;
         }
 
-
-        // Обработка идентификаторов
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (isalpha(text[uk]) || text[uk] == '_')
         {
             while (uk < text.size() && (isalnum(text[uk]) || text[uk] == '_') && i < maxLex - 1)
@@ -214,11 +218,11 @@ int Scaner::UseScaner(type_lex lex)
                 {
                     uk++;
                 }
-                PrintError("Идентификатор превышает максимальную длину лексемы.", lex);
+                PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.", lex);
                 return typeError;
             }
 
-            // Проверяем, является ли идентификатор ключевым словом
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
             for (int j = 0; j < maxKeyword; j++)
             {
                 if (strcmp(lex, keyword[j]) == 0)
@@ -229,29 +233,59 @@ int Scaner::UseScaner(type_lex lex)
             return typeId;
         }
 
-        // Обработка специальных символов
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         switch (text[uk])
         {
         case ',':
-            uk++; lex[i++] = ','; lex[i] = '\0'; return typeComma;
+            uk++;
+            lex[i++] = ',';
+            lex[i] = '\0';
+            return typeComma;
         case ';':
-            uk++; lex[i++] = ';'; lex[i] = '\0'; return typeSemicolon;
+            uk++;
+            lex[i++] = ';';
+            lex[i] = '\0';
+            return typeSemicolon;
         case '(':
-            uk++; lex[i++] = '('; lex[i] = '\0'; return typeLeftBracket;
+            uk++;
+            lex[i++] = '(';
+            lex[i] = '\0';
+            return typeLeftBracket;
         case ')':
-            uk++; lex[i++] = ')'; lex[i] = '\0'; return typeRightBracket;
+            uk++;
+            lex[i++] = ')';
+            lex[i] = '\0';
+            return typeRightBracket;
         case '{':
-            uk++; lex[i++] = '{'; lex[i] = '\0'; return typeLeftBrace;
+            uk++;
+            lex[i++] = '{';
+            lex[i] = '\0';
+            return typeLeftBrace;
         case '}':
-            uk++; lex[i++] = '}'; lex[i] = '\0'; return typeRightBrace;
+            uk++;
+            lex[i++] = '}';
+            lex[i] = '\0';
+            return typeRightBrace;
         case '+':
-            uk++; lex[i++] = '+'; lex[i] = '\0'; return typePlus;
+            uk++;
+            lex[i++] = '+';
+            lex[i] = '\0';
+            return typePlus;
         case '-':
-            uk++; lex[i++] = '-'; lex[i] = '\0'; return typeMinus;
+            uk++;
+            lex[i++] = '-';
+            lex[i] = '\0';
+            return typeMinus;
         case '*':
-            uk++; lex[i++] = '*'; lex[i] = '\0'; return typeMul;
+            uk++;
+            lex[i++] = '*';
+            lex[i] = '\0';
+            return typeMul;
         case '%':
-            uk++; lex[i++] = '%'; lex[i] = '\0'; return typeMod;
+            uk++;
+            lex[i++] = '%';
+            lex[i] = '\0';
+            return typeMod;
         case '=':
             uk++;
             lex[i++] = '=';
@@ -280,7 +314,7 @@ int Scaner::UseScaner(type_lex lex)
             else
             {
                 lex[i] = '\0';
-                PrintError("Неожидаемый символ: ", lex);
+                PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: ", lex);
                 return typeError;
             }
         case '>':
@@ -316,13 +350,13 @@ int Scaner::UseScaner(type_lex lex)
         default:
             lex[i++] = text[uk++];
             lex[i] = '\0';
-            PrintError("Лексическая ошибка в строке ", lex);
+            PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ", lex);
             return typeError;
         }
     }
 }
 
-Scaner::Scaner(const std::string& filename)
+Scaner::Scaner(const std::string &filename)
 {
     GetData(filename);
     PutUK(0);

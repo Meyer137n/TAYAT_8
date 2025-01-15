@@ -1,6 +1,6 @@
-^C:\USERS\TAYCH\ONEDRIVE\РАБОЧИЙ СТОЛ\SEMANTIC_TREE — КОПИЯ\BUILD\CMAKEFILES\CC481C99F61F93104EF79ACF276D68F6\GENERATE.STAMP.RULE
+^C:\USERS\TAYCH\ONEDRIVE\РАБОЧИЙ СТОЛ\TAYAT_8_TEST\SEMANTIC_TREE_8\BUILD\CMAKEFILES\80FE6461CFC89F8BA6D29964B3AF2964\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/taych/OneDrive/Рабочий стол/semantic_tree — копия" "-BC:/Users/taych/OneDrive/Рабочий стол/semantic_tree — копия/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/taych/OneDrive/Рабочий стол/semantic_tree — копия/build/SemanticTree.sln"
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/taych/OneDrive/Рабочий стол/TAYAT_8_test/semantic_tree_8" "-BC:/Users/taych/OneDrive/Рабочий стол/TAYAT_8_test/semantic_tree_8/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/taych/OneDrive/Рабочий стол/TAYAT_8_test/semantic_tree_8/build/SemanticTree.sln"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

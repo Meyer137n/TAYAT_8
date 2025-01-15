@@ -9,15 +9,14 @@ int main()
 {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-    Scaner *scaner;
-    Tree *tree = new Tree();
+    Scaner* scaner;
+    Tree* tree = new Tree();
     scaner = new Scaner("input.txt");
-    Diagram *diagram = new Diagram(scaner, tree);
+    Diagram* diagram = new Diagram(scaner, tree);
 
     diagram->Program();
 
-    int type;
-    type_lex lex;
+    int type; type_lex lex;
     type = scaner->UseScaner(lex);
 
     if (type == typeEnd)

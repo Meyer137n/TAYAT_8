@@ -1,12 +1,12 @@
 #include "Diagram.h"
 
-Diagram::Diagram(Scaner* scaner, Tree* tree)
+Diagram::Diagram(Scaner *scaner, Tree *tree)
 {
 	this->scaner = scaner;
 	this->tree = tree;
 }
 
-int Diagram::LookForward(int pos) 
+int Diagram::LookForward(int pos)
 {
 	type_lex lex;
 	int saved_pointer = scaner->GetUK();
@@ -17,7 +17,7 @@ int Diagram::LookForward(int pos)
 	return next_type;
 }
 
-int Diagram::Scan(type_lex lex) 
+int Diagram::Scan(type_lex lex)
 {
 	return scaner->UseScaner(lex);
 }
@@ -54,7 +54,7 @@ void Diagram::Program()
 	if (type != typeEnd)
 	{
 		type = Scan(lex);
-		scaner->PrintError("найдена ошибка в структуре Program, ожидался конец программы, ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Program, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, ", lex);
 	}
 }
 
@@ -65,13 +65,14 @@ void Diagram::Data()
 	int type2;
 	Type();
 
-	do {
+	do
+	{
 		type = LookForward(1);
 
 		if (type != typeId)
 		{
 			type = Scan(lex);
-			scaner->PrintError("найдена ошибка в структуре Data, ожидался идентификатор переменной, ", lex);
+			scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Data, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, ", lex);
 		}
 
 		type2 = LookForward(2);
@@ -89,7 +90,7 @@ void Diagram::Data()
 
 	if (type != typeSemicolon)
 	{
-		scaner->PrintError("найдена ошибка в структуре Data, ожидался символ ';', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Data, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ';', ", lex);
 	}
 }
 
@@ -102,19 +103,20 @@ void Diagram::Named_const()
 	if (type != typeConst)
 	{
 		type = Scan(lex);
-		scaner->PrintError("найдена ошибка в структуре Named_const, ожидалось ключевое слово 'const', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Named_const, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 'const', ", lex);
 	}
 	type = Scan(lex);
 	Type();
 
-	do {
+	do
+	{
 		Assignment();
 		type = Scan(lex);
 	} while (type == typeComma);
 
 	if (type != typeSemicolon)
 	{
-		scaner->PrintError("найдена ошибка в структуре Named_const, ожидался символ ';', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Named_const, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ';', ", lex);
 	}
 }
 
@@ -128,25 +130,25 @@ void Diagram::Function()
 	type = Scan(lex);
 	if (type != typeId && type != typeMain)
 	{
-		scaner->PrintError("найдена ошибка в структуре Function, ожидался идентификатор функции или ключевое слово 'main', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Function, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 'main', ", lex);
 	}
 
 	type = Scan(lex);
 	if (type != typeLeftBracket)
 	{
-		scaner->PrintError("найдена ошибка в структуре Function, ожидался символ '(', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Function, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ '(', ", lex);
 	}
 
 	type = Scan(lex);
 	if (type != typeRightBracket)
 	{
-		scaner->PrintError("найдена ошибка в структуре Function, ожидался символ ')', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Function, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ')', ", lex);
 	}
 
 	type = Scan(lex);
 	if (type != typeLeftBrace)
 	{
-		scaner->PrintError("найдена ошибка в структуре Function, ожидался символ '{', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Function, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ '{', ", lex);
 	}
 
 	type = LookForward(1);
@@ -160,10 +162,9 @@ void Diagram::Function()
 	type = Scan(lex);
 	if (type != typeRightBrace)
 	{
-		scaner->PrintError("найдена ошибка в структуре Function, ожидался символ '}', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Function, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ '}', ", lex);
 	}
 }
-
 
 void Diagram::OperatorsAndDescriptions()
 {
@@ -173,7 +174,8 @@ void Diagram::OperatorsAndDescriptions()
 	{
 		Data();
 	}
-	else Operator();
+	else
+		Operator();
 }
 
 void Diagram::Type()
@@ -186,7 +188,7 @@ void Diagram::Type()
 	if (type != typeInt && type != typeShort && type != typeLong)
 	{
 		type = Scan(lex);
-		scaner->PrintError("найдена ошибка в структуре Type, ожидался тип данных (int, short, long), ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Type, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (int, short, long), ", lex);
 	}
 	type = Scan(lex);
 
@@ -232,13 +234,13 @@ void Diagram::Assignment()
 	type = Scan(lex);
 	if (type != typeId)
 	{
-		scaner->PrintError("найдена ошибка в структуре Assignment, ожидался идентификатор переменной, ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Assignment, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, ", lex);
 	}
 
 	type = Scan(lex);
 	if (type != typeEval)
 	{
-		scaner->PrintError("найдена ошибка в структуре Assignment, ожидался символ '=', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Assignment, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ '=', ", lex);
 	}
 
 	Expression();
@@ -252,7 +254,7 @@ void Diagram::CompositeOperator()
 	type = Scan(lex);
 	if (type != typeLeftBrace)
 	{
-		scaner->PrintError("найдена ошибка в структуре CompositeOperator, ожидался символ '{', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ CompositeOperator, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ '{', ", lex);
 	}
 
 	type = LookForward(1);
@@ -266,7 +268,7 @@ void Diagram::CompositeOperator()
 	type = Scan(lex);
 	if (type != typeRightBrace)
 	{
-		scaner->PrintError("найдена ошибка в структуре CompositeOperator, ожидался символ '}', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ CompositeOperator, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ '}', ", lex);
 	}
 }
 
@@ -284,12 +286,12 @@ void Diagram::Operator()
 		type = Scan(lex);
 		if (type != typeSemicolon)
 		{
-			scaner->PrintError("найдена ошибка в структуре Operator, ожидался символ ';' после return <выражение>, ", lex);
+			scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Operator, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ';' пїЅпїЅпїЅпїЅпїЅ return <пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ>, ", lex);
 		}
 		return;
 	}
 
-	if (type == typeSemicolon) // пустой оператор
+	if (type == typeSemicolon) // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		type = Scan(lex);
 		return;
@@ -314,7 +316,7 @@ void Diagram::Operator()
 		type = Scan(lex);
 		if (type != typeSemicolon)
 		{
-			scaner->PrintError("найдена ошибка в структуре Operator, ожидался символ ';', ", lex);
+			scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Operator, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ';', ", lex);
 		}
 		return;
 	}
@@ -324,12 +326,12 @@ void Diagram::Operator()
 		Assignment();
 		type = Scan(lex);
 		if (type != typeSemicolon)
-			scaner->PrintError("найдена ошибка в структуре Operator, ожидался символ ';', ", lex);
+			scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Operator, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ';', ", lex);
 		return;
 	}
 
 	type = Scan(lex);
-	scaner->PrintError("найдена ошибка в структуре Operator, ожидался оператор, ", lex);
+	scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Operator, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, ", lex);
 }
 
 void Diagram::For_operator()
@@ -340,13 +342,13 @@ void Diagram::For_operator()
 	type = Scan(lex);
 	if (type != typeFor)
 	{
-		scaner->PrintError("найдена ошибка в структуре For_operator, ожидалось ключевое слово 'for', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ For_operator, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 'for', ", lex);
 	}
 
 	type = Scan(lex);
 	if (type != typeLeftBracket)
 	{
-		scaner->PrintError("найдена ошибка в структуре For_operator, ожидался символ '(', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ For_operator, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ '(', ", lex);
 	}
 
 	type = LookForward(1);
@@ -361,7 +363,7 @@ void Diagram::For_operator()
 		type = Scan(lex);
 		if (type != typeSemicolon)
 		{
-			scaner->PrintError("найдена ошибка в структуре For_operator, ожидался символ ';', ", lex);
+			scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ For_operator, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ';', ", lex);
 		}
 	}
 	else
@@ -369,7 +371,7 @@ void Diagram::For_operator()
 		type = Scan(lex);
 		if (type != typeSemicolon)
 		{
-			scaner->PrintError("найдена ошибка в структуре For_operator, ожидался символ ';', ", lex);
+			scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ For_operator, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ';', ", lex);
 		}
 	}
 
@@ -381,7 +383,7 @@ void Diagram::For_operator()
 	type = Scan(lex);
 	if (type != typeSemicolon)
 	{
-		scaner->PrintError("найдена ошибка в структуре For_operator, ожидался символ ';', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ For_operator, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ';', ", lex);
 	}
 
 	type = LookForward(1);
@@ -392,7 +394,7 @@ void Diagram::For_operator()
 	type = Scan(lex);
 	if (type != typeRightBracket)
 	{
-		scaner->PrintError("найдена ошибка в структуре For_operator, ожидался символ ')', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ For_operator, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ')', ", lex);
 	}
 
 	OperatorsAndDescriptions();
@@ -406,19 +408,19 @@ void Diagram::FunctionCall()
 	type = Scan(lex);
 	if (type != typeId)
 	{
-		scaner->PrintError("найдена ошибка в структуре FunctionCall, ожидался идентификатор функции, ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ FunctionCall, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, ", lex);
 	}
 
 	type = Scan(lex);
 	if (type != typeLeftBracket)
 	{
-		scaner->PrintError("найдена ошибка в структуре FunctionCall, ожидался символ '(', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ FunctionCall, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ '(', ", lex);
 	}
 
 	type = Scan(lex);
 	if (type != typeRightBracket)
 	{
-		scaner->PrintError("найдена ошибка в структуре FunctionCall, ожидался символ ')', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ FunctionCall, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ')', ", lex);
 	}
 }
 
@@ -439,7 +441,7 @@ void Diagram::Expression()
 	if (type != typeSemicolon && type != typeRightBracket && type != typeComma)
 	{
 		type = Scan(lex);
-		scaner->PrintError("найдена ошибка в структуре Expression, ожидался логический оператор, ';', ')' или ',', ", lex);
+		scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Expression, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, ';', ')' пїЅпїЅпїЅ ',', ", lex);
 	}
 }
 
@@ -525,10 +527,10 @@ void Diagram::ElementaryExpression()
 		type = Scan(lex);
 		if (type != typeRightBracket)
 		{
-			scaner->PrintError("найдена ошибка в структуре ElementaryExpression, ожидался символ ')', ", lex);
+			scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ElementaryExpression, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ')', ", lex);
 		}
 		return;
 	}
 	type = Scan(lex);
-	scaner->PrintError("найдена ошибка в структуре ElementaryExpression, ожидалось выражение, ", lex);
+	scaner->PrintError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ElementaryExpression, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, ", lex);
 }
