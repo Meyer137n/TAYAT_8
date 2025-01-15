@@ -54,7 +54,7 @@ void Diagram::Program()
 	if (type != typeEnd)
 	{
 		type = Scan(lex);
-		scaner->PrintError("������� ������ � ��������� Program, �������� ����� ���������, ", lex);
+		scaner->PrintError("найдена ошибка в структуре Program, ожидался конец программы, ", lex);
 	}
 }
 
@@ -72,7 +72,7 @@ void Diagram::Data()
 		if (type != typeId)
 		{
 			type = Scan(lex);
-			scaner->PrintError("������� ������ � ��������� Data, �������� ������������� ����������, ", lex);
+			scaner->PrintError("найдена ошибка в структуре Data, ожидался идентификатор переменной, ", lex);
 		}
 
 		type2 = LookForward(2);
@@ -90,7 +90,7 @@ void Diagram::Data()
 
 	if (type != typeSemicolon)
 	{
-		scaner->PrintError("������� ������ � ��������� Data, �������� ������ ';', ", lex);
+		scaner->PrintError("найдена ошибка в структуре Data, ожидался символ ';', ", lex);
 	}
 }
 
@@ -103,7 +103,7 @@ void Diagram::Named_const()
 	if (type != typeConst)
 	{
 		type = Scan(lex);
-		scaner->PrintError("������� ������ � ��������� Named_const, ��������� �������� ����� 'const', ", lex);
+		scaner->PrintError("найдена ошибка в структуре Named_const, ожидалось ключевое слово 'const', ", lex);
 	}
 	type = Scan(lex);
 	Type();
@@ -116,7 +116,7 @@ void Diagram::Named_const()
 
 	if (type != typeSemicolon)
 	{
-		scaner->PrintError("������� ������ � ��������� Named_const, �������� ������ ';', ", lex);
+		scaner->PrintError("найдена ошибка в структуре Named_const, ожидался символ ';', ", lex);
 	}
 }
 
@@ -130,25 +130,25 @@ void Diagram::Function()
 	type = Scan(lex);
 	if (type != typeId && type != typeMain)
 	{
-		scaner->PrintError("������� ������ � ��������� Function, �������� ������������� ������� ��� �������� ����� 'main', ", lex);
+		scaner->PrintError("найдена ошибка в структуре Function, ожидался идентификатор функции или ключевое слово 'main', ", lex);
 	}
 
 	type = Scan(lex);
 	if (type != typeLeftBracket)
 	{
-		scaner->PrintError("������� ������ � ��������� Function, �������� ������ '(', ", lex);
+		scaner->PrintError("найдена ошибка в структуре Function, ожидался символ '(', ", lex);
 	}
 
 	type = Scan(lex);
 	if (type != typeRightBracket)
 	{
-		scaner->PrintError("������� ������ � ��������� Function, �������� ������ ')', ", lex);
+		scaner->PrintError("найдена ошибка в структуре Function, ожидался символ ')', ", lex);
 	}
 
 	type = Scan(lex);
 	if (type != typeLeftBrace)
 	{
-		scaner->PrintError("������� ������ � ��������� Function, �������� ������ '{', ", lex);
+		scaner->PrintError("найдена ошибка в структуре Function, ожидался символ '{', ", lex);
 	}
 
 	type = LookForward(1);
@@ -162,7 +162,7 @@ void Diagram::Function()
 	type = Scan(lex);
 	if (type != typeRightBrace)
 	{
-		scaner->PrintError("������� ������ � ��������� Function, �������� ������ '}', ", lex);
+		scaner->PrintError("найдена ошибка в структуре Function, ожидался символ '}', ", lex);
 	}
 }
 
@@ -188,7 +188,7 @@ void Diagram::Type()
 	if (type != typeInt && type != typeShort && type != typeLong)
 	{
 		type = Scan(lex);
-		scaner->PrintError("������� ������ � ��������� Type, �������� ��� ������ (int, short, long), ", lex);
+		scaner->PrintError("найдена ошибка в структуре Type, ожидался тип данных (int, short, long), ", lex);
 	}
 	type = Scan(lex);
 
@@ -234,13 +234,13 @@ void Diagram::Assignment()
 	type = Scan(lex);
 	if (type != typeId)
 	{
-		scaner->PrintError("������� ������ � ��������� Assignment, �������� ������������� ����������, ", lex);
+		scaner->PrintError("найдена ошибка в структуре Assignment, ожидался идентификатор переменной, ", lex);
 	}
 
 	type = Scan(lex);
 	if (type != typeEval)
 	{
-		scaner->PrintError("������� ������ � ��������� Assignment, �������� ������ '=', ", lex);
+		scaner->PrintError("найдена ошибка в структуре Assignment, ожидался символ '=', ", lex);
 	}
 
 	Expression();
@@ -254,7 +254,7 @@ void Diagram::CompositeOperator()
 	type = Scan(lex);
 	if (type != typeLeftBrace)
 	{
-		scaner->PrintError("������� ������ � ��������� CompositeOperator, �������� ������ '{', ", lex);
+		scaner->PrintError("найдена ошибка в структуре CompositeOperator, ожидался символ '{', ", lex);
 	}
 
 	type = LookForward(1);
@@ -268,7 +268,7 @@ void Diagram::CompositeOperator()
 	type = Scan(lex);
 	if (type != typeRightBrace)
 	{
-		scaner->PrintError("������� ������ � ��������� CompositeOperator, �������� ������ '}', ", lex);
+		scaner->PrintError("найдена ошибка в структуре CompositeOperator, ожидался символ '}', ", lex);
 	}
 }
 
@@ -286,12 +286,12 @@ void Diagram::Operator()
 		type = Scan(lex);
 		if (type != typeSemicolon)
 		{
-			scaner->PrintError("������� ������ � ��������� Operator, �������� ������ ';' ����� return <���������>, ", lex);
+			scaner->PrintError("найдена ошибка в структуре Operator, ожидался символ ';' после return <выражение>, ", lex);
 		}
 		return;
 	}
 
-	if (type == typeSemicolon) // ������ ��������
+	if (type == typeSemicolon) // пустой оператор
 	{
 		type = Scan(lex);
 		return;
@@ -316,7 +316,7 @@ void Diagram::Operator()
 		type = Scan(lex);
 		if (type != typeSemicolon)
 		{
-			scaner->PrintError("������� ������ � ��������� Operator, �������� ������ ';', ", lex);
+			scaner->PrintError("найдена ошибка в структуре Operator, ожидался символ ';', ", lex);
 		}
 		return;
 	}
@@ -326,12 +326,12 @@ void Diagram::Operator()
 		Assignment();
 		type = Scan(lex);
 		if (type != typeSemicolon)
-			scaner->PrintError("������� ������ � ��������� Operator, �������� ������ ';', ", lex);
+			scaner->PrintError("найдена ошибка в структуре Operator, ожидался символ ';', ", lex);
 		return;
 	}
 
 	type = Scan(lex);
-	scaner->PrintError("������� ������ � ��������� Operator, �������� ��������, ", lex);
+	scaner->PrintError("найдена ошибка в структуре Operator, ожидался оператор, ", lex);
 }
 
 void Diagram::For_operator()
@@ -342,13 +342,13 @@ void Diagram::For_operator()
 	type = Scan(lex);
 	if (type != typeFor)
 	{
-		scaner->PrintError("������� ������ � ��������� For_operator, ��������� �������� ����� 'for', ", lex);
+		scaner->PrintError("найдена ошибка в структуре For_operator, ожидалось ключевое слово 'for', ", lex);
 	}
 
 	type = Scan(lex);
 	if (type != typeLeftBracket)
 	{
-		scaner->PrintError("������� ������ � ��������� For_operator, �������� ������ '(', ", lex);
+		scaner->PrintError("найдена ошибка в структуре For_operator, ожидался символ '(', ", lex);
 	}
 
 	type = LookForward(1);
@@ -363,7 +363,7 @@ void Diagram::For_operator()
 		type = Scan(lex);
 		if (type != typeSemicolon)
 		{
-			scaner->PrintError("������� ������ � ��������� For_operator, �������� ������ ';', ", lex);
+			scaner->PrintError("найдена ошибка в структуре For_operator, ожидался символ ';', ", lex);
 		}
 	}
 	else
@@ -371,7 +371,7 @@ void Diagram::For_operator()
 		type = Scan(lex);
 		if (type != typeSemicolon)
 		{
-			scaner->PrintError("������� ������ � ��������� For_operator, �������� ������ ';', ", lex);
+			scaner->PrintError("найдена ошибка в структуре For_operator, ожидался символ ';', ", lex);
 		}
 	}
 
@@ -383,7 +383,7 @@ void Diagram::For_operator()
 	type = Scan(lex);
 	if (type != typeSemicolon)
 	{
-		scaner->PrintError("������� ������ � ��������� For_operator, �������� ������ ';', ", lex);
+		scaner->PrintError("найдена ошибка в структуре For_operator, ожидался символ ';', ", lex);
 	}
 
 	type = LookForward(1);
@@ -394,7 +394,7 @@ void Diagram::For_operator()
 	type = Scan(lex);
 	if (type != typeRightBracket)
 	{
-		scaner->PrintError("������� ������ � ��������� For_operator, �������� ������ ')', ", lex);
+		scaner->PrintError("найдена ошибка в структуре For_operator, ожидался символ ')', ", lex);
 	}
 
 	OperatorsAndDescriptions();
@@ -408,19 +408,19 @@ void Diagram::FunctionCall()
 	type = Scan(lex);
 	if (type != typeId)
 	{
-		scaner->PrintError("������� ������ � ��������� FunctionCall, �������� ������������� �������, ", lex);
+		scaner->PrintError("найдена ошибка в структуре FunctionCall, ожидался идентификатор функции, ", lex);
 	}
 
 	type = Scan(lex);
 	if (type != typeLeftBracket)
 	{
-		scaner->PrintError("������� ������ � ��������� FunctionCall, �������� ������ '(', ", lex);
+		scaner->PrintError("найдена ошибка в структуре FunctionCall, ожидался символ '(', ", lex);
 	}
 
 	type = Scan(lex);
 	if (type != typeRightBracket)
 	{
-		scaner->PrintError("������� ������ � ��������� FunctionCall, �������� ������ ')', ", lex);
+		scaner->PrintError("найдена ошибка в структуре FunctionCall, ожидался символ ')', ", lex);
 	}
 }
 
@@ -441,7 +441,7 @@ void Diagram::Expression()
 	if (type != typeSemicolon && type != typeRightBracket && type != typeComma)
 	{
 		type = Scan(lex);
-		scaner->PrintError("������� ������ � ��������� Expression, �������� ���������� ��������, ';', ')' ��� ',', ", lex);
+		scaner->PrintError("найдена ошибка в структуре Expression, ожидался логический оператор, ';', ')' или ',', ", lex);
 	}
 }
 
@@ -527,10 +527,10 @@ void Diagram::ElementaryExpression()
 		type = Scan(lex);
 		if (type != typeRightBracket)
 		{
-			scaner->PrintError("������� ������ � ��������� ElementaryExpression, �������� ������ ')', ", lex);
+			scaner->PrintError("найдена ошибка в структуре ElementaryExpression, ожидался символ ')', ", lex);
 		}
 		return;
 	}
 	type = Scan(lex);
-	scaner->PrintError("������� ������ � ��������� ElementaryExpression, ��������� ���������, ", lex);
+	scaner->PrintError("найдена ошибка в структуре ElementaryExpression, ожидалось выражение, ", lex);
 }

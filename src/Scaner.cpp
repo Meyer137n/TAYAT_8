@@ -1,20 +1,20 @@
 #include "Scaner.h"
 
 /**
- * ������ ���������� �������� ���� � ���������
+ * Список допустимых ключевых слов в программе
  */
 type_lex keyword[maxKeyword] =
     {
         "int", "short", "long", "main", "return", "for", "const"};
 
 /**
- * ������ ���������������, ������� ������������� ���������� �������� ������ � ���������
+ * Список идентификаторов, которые соответствуют допустимым ключевым словам в программе
  */
 int indexKeyword[maxKeyword] =
     {
         typeInt, typeShort, typeLong, typeMain, typeReturn, typeFor, typeConst};
 
-// ������ ���� ���� ������
+// Ошибка если файл пустой
 void Scaner::PutUK(size_t uk)
 {
     if (uk < text.size())
@@ -23,7 +23,7 @@ void Scaner::PutUK(size_t uk)
     }
     else if (text.size() != 0)
     {
-        std::cerr << "������: ������ ������� �� ������� ������� ������." << std::endl;
+        std::cerr << "Ошибка: индекс выходит за пределы размера текста." << std::endl;
         exit(1);
     }
 }
@@ -40,10 +40,10 @@ void Scaner::GetData(const std::string &filename)
     {
         std::stringstream buffer;
         buffer << file.rdbuf();
-        text = buffer.str(); // ��������� ����� �� �����
+        text = buffer.str(); // Сохраняем текст из файла
         text += '\n';
 
-        // ���������� ������� �������� ������
+        // Определяем позиции перевода строки
         for (size_t i = 0; i < text.size(); ++i)
         {
             if (text[i] == '\n')
@@ -52,14 +52,14 @@ void Scaner::GetData(const std::string &filename)
             }
         }
 
-        std::cout << "����� ���������:" << std::endl
+        std::cout << "Текст программы:" << std::endl
                   << text << std::endl;
         std::cout << std::endl
-                  << "��������� ������ �������:" << std::endl;
+                  << "Результат работы сканера:" << std::endl;
     }
     else
     {
-        PrintError("������ �������� �����.", filename);
+        PrintError("Ошибка открытия файла.", filename);
     }
 }
 
@@ -81,10 +81,10 @@ void Scaner::PrintError(const std::string &error, const std::string &lexeme)
         }
     }
 
-    std::cout << "Error: " << "������ " << line << ", " << error;
+    std::cout << "Error: " << "строка " << line << ", " << error;
     if (!lexeme.empty())
     {
-        std::cout << "�������: " << lexeme << "\n\n";
+        std::cout << "найдено: " << lexeme << "\n\n";
     }
     exit(1);
 }
@@ -96,20 +96,20 @@ int Scaner::UseScaner(type_lex lex)
 
     while (true)
     {
-        // ���������� �������
+        // Пропускаем пробелы
         while (uk < text.size() && (text[uk] == ' ' || text[uk] == '\t' || text[uk] == '\n'))
         {
             uk++;
         }
 
-        // ����� ���������
+        // Конец программы
         if (uk >= text.size())
         {
             lex[i] = '\0';
             return typeEnd;
         }
 
-        // ��������� ������������
+        // Обработка комментариев
         if (text[uk] == '/')
         {
             uk++;
@@ -123,14 +123,14 @@ int Scaner::UseScaner(type_lex lex)
             }
             else
             {
-                // �������
+                // Деление
                 lex[i++] = '/';
                 lex[i++] = '\0';
                 return typeDiv;
             }
         }
 
-        // ��������� �����
+        // Обработка чисел
         if (isdigit(text[uk]))
         {
             if (text[uk] == '0')
@@ -156,7 +156,7 @@ int Scaner::UseScaner(type_lex lex)
                             lex[i++] = text[uk++];
                         }
                         lex[i] = '\0';
-                        PrintError("��������� ��������� ������������ �����, �������� 7 ����: ", lex);
+                        PrintError("Константа превышает максимальную длину, максимум 7 цифр: ", lex);
                         return typeError;
                     }
 
@@ -188,7 +188,7 @@ int Scaner::UseScaner(type_lex lex)
                     lex[i++] = text[uk++];
                 }
                 lex[i] = '\0';
-                PrintError("��������� ��������� ������������ �����, �������� 9 ����: ", lex);
+                PrintError("Константа превышает максимальную длину, максимум 9 цифр: ", lex);
                 return typeError;
             }
 
@@ -203,7 +203,7 @@ int Scaner::UseScaner(type_lex lex)
             return typeConstInt;
         }
 
-        // ��������� ���������������
+        // Обработка идентификаторов
         if (isalpha(text[uk]) || text[uk] == '_')
         {
             while (uk < text.size() && (isalnum(text[uk]) || text[uk] == '_') && i < maxLex - 1)
@@ -218,11 +218,11 @@ int Scaner::UseScaner(type_lex lex)
                 {
                     uk++;
                 }
-                PrintError("������������� ��������� ������������ ����� �������.", lex);
+                PrintError("Идентификатор превышает максимальную длину лексемы.", lex);
                 return typeError;
             }
 
-            // ���������, �������� �� ������������� �������� ������
+            // Проверяем, является ли идентификатор ключевым словом
             for (int j = 0; j < maxKeyword; j++)
             {
                 if (strcmp(lex, keyword[j]) == 0)
@@ -233,7 +233,7 @@ int Scaner::UseScaner(type_lex lex)
             return typeId;
         }
 
-        // ��������� ����������� ��������
+        // Обработка специальных символов
         switch (text[uk])
         {
         case ',':
@@ -314,7 +314,7 @@ int Scaner::UseScaner(type_lex lex)
             else
             {
                 lex[i] = '\0';
-                PrintError("����������� ������: ", lex);
+                PrintError("Неожидаемый символ: ", lex);
                 return typeError;
             }
         case '>':
@@ -350,7 +350,7 @@ int Scaner::UseScaner(type_lex lex)
         default:
             lex[i++] = text[uk++];
             lex[i] = '\0';
-            PrintError("����������� ������ � ������ ", lex);
+            PrintError("Лексическая ошибка в строке ", lex);
             return typeError;
         }
     }

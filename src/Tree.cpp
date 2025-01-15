@@ -8,70 +8,80 @@ Tree::Tree()
 	node = NULL;
 }
 
-Tree::Tree(Tree* up, Tree* left, Tree* right, Node* node)
+Tree::Tree(Tree *up, Tree *left, Tree *right, Node *node)
 {
 	this->up = up;
 	this->left = left;
 	this->right = right;
 	this->node = new Node();
-	if (node != NULL) memcpy(this->node, node, sizeof(Node));
+	if (node != NULL)
+		memcpy(this->node, node, sizeof(Node));
 }
 
 Tree::~Tree()
 {
-	if (left != nullptr) delete left;
-	if (right != nullptr) delete right;
-	if (node != nullptr) delete node;
+	if (left != nullptr)
+		delete left;
+	if (right != nullptr)
+		delete right;
+	if (node != nullptr)
+		delete node;
 }
 
 void Tree::PrintError(std::string errorMessage, std::string lexeme)
 {
-	std::cout << "Семантическая ошибка. " << errorMessage << " Найдено: " << lexeme << std::endl;
+	std::cout << "РЎРµРјР°РЅС‚РёС‡РµСЃРєР°СЏ РѕС€РёР±РєР°. " << errorMessage << " РќР°Р№РґРµРЅРѕ: " << lexeme << std::endl;
 	exit(1);
 }
 
-void Tree::SetLeft(Node* node)
+void Tree::SetLeft(Node *node)
 {
 	this->left = new Tree(this, NULL, NULL, node);
 }
 
-Tree* Tree::FindFunction(const type_lex& lex) {
-	Tree* currentNode = this;
+Tree *Tree::FindFunction(const type_lex &lex)
+{
+	Tree *currentNode = this;
 
-	// Перебираем узлы в дереве
-	while (currentNode != nullptr) {
+	// РџРµСЂРµР±РёСЂР°РµРј СѓР·Р»С‹ РІ РґРµСЂРµРІРµ
+	while (currentNode != nullptr)
+	{
 		if (currentNode->node != nullptr &&
 			currentNode->node->id == lex &&
-			currentNode->node->objectType == OBJ_FUNC) { // Проверка на тип объекта
-			return currentNode; // Если найдена функция, возвращаем ее
+			currentNode->node->objectType == OBJ_FUNC)
+		{						// РџСЂРѕРІРµСЂРєР° РЅР° С‚РёРї РѕР±СЉРµРєС‚Р°
+			return currentNode; // Р•СЃР»Рё РЅР°Р№РґРµРЅР° С„СѓРЅРєС†РёСЏ, РІРѕР·РІСЂР°С‰Р°РµРј РµРµ
 		}
-		currentNode = currentNode->GetRight(); // Переход к следующему узлу
+		currentNode = currentNode->GetRight(); // РџРµСЂРµС…РѕРґ Рє СЃР»РµРґСѓСЋС‰РµРјСѓ СѓР·Р»Сѓ
 	}
-	return nullptr; // Метод не найден
+	return nullptr; // РњРµС‚РѕРґ РЅРµ РЅР°Р№РґРµРЅ
 }
 
-void Tree::SetRight(Node* node)
+void Tree::SetRight(Node *node)
 {
 	this->right = new Tree(this, NULL, NULL, node);
 }
 
-Tree* Tree::GetLeft()
+Tree *Tree::GetLeft()
 {
 	return this->left;
 }
 
-Tree* Tree::GetRight()
+Tree *Tree::GetRight()
 {
 	return this->right;
 }
 
-Tree* Tree::FindUp(Tree* from, std::string id)
+Tree *Tree::FindUp(Tree *from, std::string id)
 {
-	Tree* current = from;
+	Tree *current = from;
 
-	while (current != NULL) {
-		if (current->node != NULL) {
-			if (id.compare(current->node->id) == 0) break;
+	while (current != NULL)
+	{
+		if (current->node != NULL)
+		{
+			if (id.compare(current->node->id) == 0)
+				break;
 		}
 		current = current->up;
 	}
@@ -79,18 +89,21 @@ Tree* Tree::FindUp(Tree* from, std::string id)
 	return current;
 }
 
-Tree* Tree::FindUp(std::string id)
+Tree *Tree::FindUp(std::string id)
 {
 	return FindUp(this, id);
 }
 
-Tree* Tree::FindUp(Tree* from, std::string id, type_object type)
+Tree *Tree::FindUp(Tree *from, std::string id, type_object type)
 {
-	Tree* current = from;
+	Tree *current = from;
 
-	while (current != NULL) {
-		if (current->node != NULL) {
-			if (id.compare(current->node->id) == 0 && type == current->node->objectType) break;
+	while (current != NULL)
+	{
+		if (current->node != NULL)
+		{
+			if (id.compare(current->node->id) == 0 && type == current->node->objectType)
+				break;
 		}
 
 		current = current->up;
@@ -99,18 +112,21 @@ Tree* Tree::FindUp(Tree* from, std::string id, type_object type)
 	return current;
 }
 
-Tree* Tree::FindUp(std::string id, type_object type)
+Tree *Tree::FindUp(std::string id, type_object type)
 {
 	return FindUp(this, id, type);
 }
 
-Tree* Tree::FindUp(Tree* from, type_object type)
+Tree *Tree::FindUp(Tree *from, type_object type)
 {
-	Tree* current = from;
+	Tree *current = from;
 
-	while (current != NULL) {
-		if (current->node != NULL) {
-			if (type == current->node->objectType) break;
+	while (current != NULL)
+	{
+		if (current->node != NULL)
+		{
+			if (type == current->node->objectType)
+				break;
 		}
 
 		current = current->up;
@@ -119,18 +135,19 @@ Tree* Tree::FindUp(Tree* from, type_object type)
 	return current;
 }
 
-Tree* Tree::FindUp(type_object type)
+Tree *Tree::FindUp(type_object type)
 {
 	return FindUp(this, type);
 }
 
-Tree* Tree::FindUpOneLevel(Tree* from, std::string id)
+Tree *Tree::FindUpOneLevel(Tree *from, std::string id)
 {
-	Tree* current = from;
+	Tree *current = from;
 
 	while (current != NULL && current->up != NULL && current->up->right != current)
 	{
-		if (id.compare(current->node->id) == 0) {
+		if (id.compare(current->node->id) == 0)
+		{
 			return current;
 		}
 		current = current->up;
@@ -138,12 +155,15 @@ Tree* Tree::FindUpOneLevel(Tree* from, std::string id)
 	return NULL;
 }
 
-Tree* Tree::FindRightLeft(Tree* from, std::string id)
+Tree *Tree::FindRightLeft(Tree *from, std::string id)
 {
-	Tree* curNode = from->right;
-	while (curNode != NULL) {
-		if (curNode->node != NULL) {
-			if (id.compare(curNode->node->id) == 0) break;
+	Tree *curNode = from->right;
+	while (curNode != NULL)
+	{
+		if (curNode->node != NULL)
+		{
+			if (id.compare(curNode->node->id) == 0)
+				break;
 		}
 
 		curNode = curNode->left;
@@ -151,14 +171,14 @@ Tree* Tree::FindRightLeft(Tree* from, std::string id)
 	return curNode;
 }
 
-Tree* Tree::FindRightLeft(std::string id)
+Tree *Tree::FindRightLeft(std::string id)
 {
 	return FindRightLeft(this, id);
 }
 
-Tree* Tree::FindLeft(Tree* from, std::string id)
+Tree *Tree::FindLeft(Tree *from, std::string id)
 {
-	Tree* current = from;
+	Tree *current = from;
 
 	while (current != NULL)
 	{
@@ -172,102 +192,123 @@ Tree* Tree::FindLeft(Tree* from, std::string id)
 	return current;
 }
 
-Tree* Tree::FindLeft(std::string id)
+Tree *Tree::FindLeft(std::string id)
 {
 	return FindLeft(this, id);
 }
 
 type_data Tree::GetDataType(int type)
 {
-	if (type == typeInt) return TYPE_INTEGER;
-	if (type == typeShort) return TYPE_SHORT;
-	if (type == typeLong) return TYPE_LONG;
+	if (type == typeInt)
+		return TYPE_INTEGER;
+	if (type == typeShort)
+		return TYPE_SHORT;
+	if (type == typeLong)
+		return TYPE_LONG;
 	return TYPE_UNKNOWN;
 }
 
-type_data Tree::GetTypeResult(type_data type1, type_data type2, int operation) {
-	if (operation >= typeUnEq && operation <= typeMore) return TYPE_SHORT;
-	if (operation == typeMod && (type1 == TYPE_FLOAT || type2 == TYPE_FLOAT)) return TYPE_UNKNOWN;
-	if (type1 >= type2) return type1;
+type_data Tree::GetTypeResult(type_data type1, type_data type2, int operation)
+{
+	if (operation >= typeUnEq && operation <= typeMore)
+		return TYPE_SHORT;
+	if (operation == typeMod && (type1 == TYPE_FLOAT || type2 == TYPE_FLOAT))
+		return TYPE_UNKNOWN;
+	if (type1 >= type2)
+		return type1;
 
 	return type2;
 }
 
-void Tree::Print() {
-	if (node != NULL) {
-		std::cout << "узел: " << node->id << " ";
+void Tree::Print()
+{
+	if (node != NULL)
+	{
+		std::cout << "СѓР·РµР»: " << node->id << " ";
 	}
 
-	if (left != NULL) {
-		std::cout << "лево: " << left->node->id << " ";
-		left->Print(); // рекурсивный вызов для левого дочернего узла
+	if (left != NULL)
+	{
+		std::cout << "Р»РµРІРѕ: " << left->node->id << " ";
+		left->Print(); // СЂРµРєСѓСЂСЃРёРІРЅС‹Р№ РІС‹Р·РѕРІ РґР»СЏ Р»РµРІРѕРіРѕ РґРѕС‡РµСЂРЅРµРіРѕ СѓР·Р»Р°
 	}
 
-	if (right != NULL) {
-		std::cout << "право: " << right->node->id << " ";
-		right->Print(); // рекурсивный вызов для правого дочернего
+	if (right != NULL)
+	{
+		std::cout << "РїСЂР°РІРѕ: " << right->node->id << " ";
+		right->Print(); // СЂРµРєСѓСЂСЃРёРІРЅС‹Р№ РІС‹Р·РѕРІ РґР»СЏ РїСЂР°РІРѕРіРѕ РґРѕС‡РµСЂРЅРµРіРѕ
 	}
 	std::cout << std::endl;
 }
 
-void Tree::Print(int level) {
-	//std::string indent(level * 2, ' ');
+void Tree::Print(int level)
+{
+	// std::string indent(level * 2, ' ');
 	std::string indent = "";
 	std::cout << std::endl;
-	if (node != NULL) {
+	if (node != NULL)
+	{
 		if (node->id == "")
-			std::cout << "Узел: ";
+			std::cout << "РЈР·РµР»: ";
 		else
-			std::cout << "Узел: " << node->id;
+			std::cout << "РЈР·РµР»: " << node->id;
 	}
 	else
 	{
-		std::cout << indent << "Узел: ";
+		std::cout << indent << "РЈР·РµР»: ";
 	}
-	if (right != NULL) {
+	if (right != NULL)
+	{
 
-		std::cout << indent << " Право -> " << right->node->id;
+		std::cout << indent << " РџСЂР°РІРѕ -> " << right->node->id;
 
-		//right->Print(level + 1); // Рекурсивный вывод для правого дочернего узла
-
+		// right->Print(level + 1); // Р РµРєСѓСЂСЃРёРІРЅС‹Р№ РІС‹РІРѕРґ РґР»СЏ РїСЂР°РІРѕРіРѕ РґРѕС‡РµСЂРЅРµРіРѕ СѓР·Р»Р°
 	}
-	if (left != NULL) {
-		std::cout << indent << " Лево ->" << left->node->id;
-		//left->Print(level + 1); // Рекурсивный вывод для левого дочернего узла
+	if (left != NULL)
+	{
+		std::cout << indent << " Р›РµРІРѕ ->" << left->node->id;
+		// left->Print(level + 1); // Р РµРєСѓСЂСЃРёРІРЅС‹Р№ РІС‹РІРѕРґ РґР»СЏ Р»РµРІРѕРіРѕ РґРѕС‡РµСЂРЅРµРіРѕ СѓР·Р»Р°
 	}
-	if (right != NULL) {
+	if (right != NULL)
+	{
 
-		//std::cout << indent << " Право -> ";
+		// std::cout << indent << " РџСЂР°РІРѕ -> ";
 
-		right->Print(level + 1); // Рекурсивный вывод для правого дочернего узла
-
+		right->Print(level + 1); // Р РµРєСѓСЂСЃРёРІРЅС‹Р№ РІС‹РІРѕРґ РґР»СЏ РїСЂР°РІРѕРіРѕ РґРѕС‡РµСЂРЅРµРіРѕ СѓР·Р»Р°
 	}
-	if (left != NULL) {
-		//std::cout << indent << " Лево ->";
-		left->Print(level + 1); // Рекурсивный вывод для левого дочернего узла
+	if (left != NULL)
+	{
+		// std::cout << indent << " Р›РµРІРѕ ->";
+		left->Print(level + 1); // Р РµРєСѓСЂСЃРёРІРЅС‹Р№ РІС‹РІРѕРґ РґР»СЏ Р»РµРІРѕРіРѕ РґРѕС‡РµСЂРЅРµРіРѕ СѓР·Р»Р°
 	}
 }
 
-bool Tree::IsDoublicateId(Tree* addr, std::string id) {
-	if (FindUpOneLevel(addr, id) == NULL) return false;
+bool Tree::IsDoublicateId(Tree *addr, std::string id)
+{
+	if (FindUpOneLevel(addr, id) == NULL)
+		return false;
 	return true;
 }
 
-bool Tree::IsAllowChangeId(std::string id) {
-	Tree* node = FindUp(id);
+bool Tree::IsAllowChangeId(std::string id)
+{
+	Tree *node = FindUp(id);
 	if (node->node->objectType != OBJ_VAR)
 		return false;
 	return true;
 }
 
-bool Tree::IsMainExists() {
-	Tree* root = this;
+bool Tree::IsMainExists()
+{
+	Tree *root = this;
 
-	while (root->up != NULL) root = root->up;
+	while (root->up != NULL)
+		root = root->up;
 
-	Tree* main = root->FindLeft("main");
+	Tree *main = root->FindLeft("main");
 
-	if (main == NULL) return false;
+	if (main == NULL)
+		return false;
 	return true;
 }
 
@@ -291,6 +332,7 @@ bool Tree::IsSelfInit()
 	return node->flagInit;
 }
 
-void Tree::SetInit() {
+void Tree::SetInit()
+{
 	this->node->flagInit = 1;
 }

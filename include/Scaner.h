@@ -9,15 +9,15 @@
 class Scaner
 {
 private:
-    std::string text; // Исходный текст
-    size_t uk;        // Указатель текущей позиции в исходном тексте
+    std::string text; // РСЃС…РѕРґРЅС‹Р№ С‚РµРєСЃС‚
+    size_t uk;        // РЈРєР°Р·Р°С‚РµР»СЊ С‚РµРєСѓС‰РµР№ РїРѕР·РёС†РёРё РІ РёСЃС…РѕРґРЅРѕРј С‚РµРєСЃС‚Рµ
 
 public:
-    void PutUK(size_t uk);                // Установить указатель текущей позиции в исходном тексте
-    size_t GetUK();                       // Получить указатель текущей позиции в исходном тексте
-    void PrintError(const std::string& error, const std::string& text); // Вывод ошибки
-    int UseScaner(type_lex lex);          // Логика работы сканера
-    void GetData(const std::string& filename); // Получение информации из файла
-    Scaner(const std::string& filename);
+    void PutUK(size_t uk);                                              // РЈСЃС‚Р°РЅРѕРІРёС‚СЊ СѓРєР°Р·Р°С‚РµР»СЊ С‚РµРєСѓС‰РµР№ РїРѕР·РёС†РёРё РІ РёСЃС…РѕРґРЅРѕРј С‚РµРєСЃС‚Рµ
+    size_t GetUK();                                                     // РџРѕР»СѓС‡РёС‚СЊ СѓРєР°Р·Р°С‚РµР»СЊ С‚РµРєСѓС‰РµР№ РїРѕР·РёС†РёРё РІ РёСЃС…РѕРґРЅРѕРј С‚РµРєСЃС‚Рµ
+    void PrintError(const std::string &error, const std::string &text); // Р’С‹РІРѕРґ РѕС€РёР±РєРё
+    int UseScaner(type_lex lex);                                        // Р›РѕРіРёРєР° СЂР°Р±РѕС‚С‹ СЃРєР°РЅРµСЂР°
+    void GetData(const std::string &filename);                          // РџРѕР»СѓС‡РµРЅРёРµ РёРЅС„РѕСЂРјР°С†РёРё РёР· С„Р°Р№Р»Р°
+    Scaner(const std::string &filename);
     std::vector<int> lineBreakPositions;
 };
