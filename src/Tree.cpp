@@ -205,6 +205,8 @@ type_data Tree::GetDataType(int type)
 		return TYPE_SHORT;
 	if (type == typeLong)
 		return TYPE_LONG;
+	// if (type == typeFloat)
+	// 	return TYPE_FLOAT;
 	return TYPE_UNKNOWN;
 }
 
@@ -331,6 +333,26 @@ bool Tree::IsSelfInit()
 {
 	return node->flagInit;
 }
+
+// bool Tree::CanBeAdded(type_data type1, type_data type2)
+// {
+// 	if ((type1 == typeInt || type1 == typeFloat) &&
+// 		(type2 == typeInt || type2 == typeFloat))
+// 	{
+// 		return true;
+// 	}
+// 	return false;
+// }
+
+// bool Tree::CanBeAdded(int type1, int type2)
+// {
+// 	if ((type1 == typeInt || type1 == typeFloat) &&
+// 		(type2 == typeInt || type2 == typeFloat))
+// 	{
+// 		return true;
+// 	}
+// 	return false;
+// }
 
 void Tree::SetInit()
 {
