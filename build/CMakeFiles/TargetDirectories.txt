@@ -1,0 +1,3 @@
+C:/Users/taych/OneDrive/Рабочий стол/semantic_tree — копия/build/CMakeFiles/SemanticTree.dir
+C:/Users/taych/OneDrive/Рабочий стол/semantic_tree — копия/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/taych/OneDrive/Рабочий стол/semantic_tree — копия/build/CMakeFiles/ZERO_CHECK.dir
